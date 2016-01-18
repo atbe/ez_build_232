@@ -1,0 +1,53 @@
+#!/bin/bash
+
+echo "You lazy cat..."
+
+if [ "$1" = "" ];
+then
+echo "You did not provide a file. byebye."
+exit
+fi
+
+echo "Choose a Compiler/Standard: "
+echo "1. g++/C++11"
+echo "x. cancel"
+
+read choice
+if [ "$choice" = "1" ]; 
+    then
+        if [ "$2" = "" ]; then
+        g++ -std=c++11 -Wall $1 -o a.out
+        echo "in_there"
+        else
+        g++ -std=c++11 -Wall $1 -o "$2"
+        echo "in_there"
+        fi
+    echo "Would you like to run the file now? [Y/n]"
+    read run_or_naw
+    if [ "$run_or_naw" = "y" -o "$run_or_naw" = "Y" ] && [ "$2" = "" ];
+        then
+        echo "Running file: a.out"
+        echo ""
+        ./a.out
+    elif [ "$run_or_naw" = "y" -o "$run_or_naw" = "Y" ] && [ "$2" != "" ]
+        then
+        echo "Running file: $2"
+        echo ""
+        ./"$2"
+    elif [ "$run_or_naw" = "n" -o "$run_or_naw" = "N" ] && [ "$2" = "" ]
+        then
+        echo "byebye"
+        exit
+    elif [ "$run_or_naw" = "n" -o "$run_or_naw" = "N" ] && [ "$2" != "" ]
+        then
+        echo "File saved as $2. byebye."
+        exit
+    fi
+elif [ "$choice" = "x" ]
+    then
+    echo "byebye."
+    exit
+else
+    echo "You did not enter a valid choice. Goodbye..."
+    exit
+fi
